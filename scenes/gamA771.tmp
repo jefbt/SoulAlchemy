@@ -1,0 +1,73 @@
+[gd_scene load_steps=2 format=3 uid="uid://jxmlqa5oskle"]
+
+[ext_resource type="Script" path="res://scripts/game_manager.gd" id="1_faqmt"]
+
+[node name="Game" type="Node2D"]
+
+[node name="GameManager" type="Node" parent="."]
+script = ExtResource("1_faqmt")
+falling_move_duration = 0.25
+
+[node name="Add" type="Button" parent="GameManager"]
+offset_left = -530.0
+offset_top = 207.0
+offset_right = -454.0
+offset_bottom = 238.0
+text = "Add Line"
+
+[node name="Move" type="Button" parent="GameManager"]
+offset_left = 454.0
+offset_top = 219.0
+offset_right = 530.0
+offset_bottom = 250.0
+text = "Move Falling"
+
+[node name="Launch0" type="Button" parent="GameManager"]
+custom_minimum_size = Vector2(65, 65)
+offset_left = -195.0
+offset_top = 260.0
+offset_right = -130.0
+offset_bottom = 325.0
+text = "+1"
+
+[node name="Launch1" type="Button" parent="GameManager"]
+custom_minimum_size = Vector2(65, 65)
+offset_left = -130.0
+offset_top = 260.0
+offset_right = -65.0
+offset_bottom = 325.0
+text = "+1"
+
+[node name="Launch2" type="Button" parent="GameManager"]
+custom_minimum_size = Vector2(65, 65)
+offset_left = -65.0
+offset_top = 260.0
+offset_bottom = 325.0
+text = "+1"
+
+[node name="Launch3" type="Button" parent="GameManager"]
+custom_minimum_size = Vector2(65, 65)
+offset_top = 260.0
+offset_right = 65.0
+offset_bottom = 325.0
+text = "+1"
+
+[node name="Launch4" type="Button" parent="GameManager"]
+custom_minimum_size = Vector2(65, 65)
+offset_left = 65.0
+offset_top = 260.0
+offset_right = 130.0
+offset_bottom = 325.0
+text = "+1"
+
+[node name="SoulObjects" type="Node" parent="."]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[connection signal="pressed" from="GameManager/Add" to="GameManager" method="_on_button_pressed"]
+[connection signal="pressed" from="GameManager/Move" to="GameManager" method="_on_move_pressed"]
+[connection signal="pressed" from="GameManager/Launch0" to="GameManager" method="_on_launch_0_pressed"]
+[connection signal="pressed" from="GameManager/Launch1" to="GameManager" method="_on_launch_1_pressed"]
+[connection signal="pressed" from="GameManager/Launch2" to="GameManager" method="_on_launch_2_pressed"]
+[connection signal="pressed" from="GameManager/Launch3" to="GameManager" method="_on_launch_3_pressed"]
+[connection signal="pressed" from="GameManager/Launch4" to="GameManager" method="_on_launch_4_pressed"]

@@ -1,0 +1,223 @@
+[gd_scene load_steps=20 format=3 uid="uid://bqgqi4wih1st0"]
+
+[ext_resource type="Script" path="res://objects/soul_object/soul_object.gd" id="1_5vjre"]
+[ext_resource type="Texture2D" uid="uid://dknc17anudb2r" path="res://assets/art/0-Water.png" id="2_32a71"]
+[ext_resource type="Texture2D" uid="uid://c3bcqxb8q5bsc" path="res://assets/art/1-Metal.png" id="3_m5nge"]
+[ext_resource type="Texture2D" uid="uid://csapbmukdisbd" path="res://assets/art/2-Earth.png" id="4_sxt5g"]
+[ext_resource type="Texture2D" uid="uid://bd3ype8au0xqy" path="res://assets/art/3-Fire.png" id="5_f2h4e"]
+[ext_resource type="Texture2D" uid="uid://dyohuuw7238go" path="res://assets/art/4-Wood.png" id="6_q03qs"]
+[ext_resource type="Texture2D" uid="uid://c7ivf8wxpxr4b" path="res://assets/art/yellow_body_squircle.png" id="7_kny4c"]
+[ext_resource type="Texture2D" uid="uid://dvli1ej3wu0yw" path="res://assets/art/purple_body_square.png" id="8_fqabn"]
+[ext_resource type="Texture2D" uid="uid://d3vqxt5do8kf1" path="res://assets/art/ship_D.png" id="9_yejph"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c7c12"]
+atlas = ExtResource("2_32a71")
+region = Rect2(0, 0, 129, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hv23n"]
+atlas = ExtResource("3_m5nge")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7apx2"]
+atlas = ExtResource("4_sxt5g")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vg6am"]
+atlas = ExtResource("5_f2h4e")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bag5e"]
+atlas = ExtResource("6_q03qs")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_31gvs"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c7c12")
+}],
+"loop": true,
+"name": &"0",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hv23n")
+}],
+"loop": true,
+"name": &"1",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7apx2")
+}],
+"loop": true,
+"name": &"2",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vg6am")
+}],
+"loop": true,
+"name": &"3",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bag5e")
+}],
+"loop": true,
+"name": &"4",
+"speed": 5.0
+}]
+
+[sub_resource type="Animation" id="Animation_4qaws"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0.4, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:scale:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0.4, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="Animation" id="Animation_1aiy1"]
+resource_name = "start"
+length = 0.5
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0.01, -0.25, 0, 0.25, 0, 0.4, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.5)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:scale:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0.01, -0.25, 0, 0.25, 0, 0.4, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.5)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rvhxl"]
+_data = {
+"RESET": SubResource("Animation_4qaws"),
+"start": SubResource("Animation_1aiy1")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_f8jyr"]
+size = Vector2(64, 64)
+
+[node name="SoulObject" type="Area2D"]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("1_5vjre")
+element_color = Array[Color]([Color(0.364706, 0.886275, 0.905882, 1), Color(0.807843, 0.807843, 0.807843, 1), Color(0.552941, 0.435294, 0.392157, 1), Color(1, 0.337255, 0.00392157, 1), Color(0.74902, 0.839216, 0.254902, 1)])
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.4, 0.4)
+sprite_frames = SubResource("SpriteFrames_31gvs")
+animation = &"0"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite"]
+libraries = {
+"": SubResource("AnimationLibrary_rvhxl")
+}
+autoplay = "start"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_f8jyr")
+
+[node name="SpriteLight" type="Sprite2D" parent="."]
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("7_kny4c")
+
+[node name="SpriteShadows" type="Sprite2D" parent="."]
+rotation = 0.785398
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("8_fqabn")
+
+[node name="Connections" type="Node2D" parent="."]
+
+[node name="TopConn" type="Node2D" parent="Connections"]
+
+[node name="Sprite2D" type="Sprite2D" parent="Connections/TopConn"]
+modulate = Color(1, 0.670588, 1, 1)
+position = Vector2(-5, -31)
+scale = Vector2(0.05, 0.3)
+texture = ExtResource("9_yejph")
+
+[node name="BottomConn" type="Node2D" parent="Connections"]
+rotation = 3.14159
+
+[node name="Sprite2D" type="Sprite2D" parent="Connections/BottomConn"]
+modulate = Color(1, 0.670588, 1, 1)
+position = Vector2(-5, -31)
+scale = Vector2(0.05, 0.3)
+texture = ExtResource("9_yejph")
+
+[node name="LeftConn" type="Node2D" parent="Connections"]
+rotation = -1.5708
+
+[node name="Sprite2D" type="Sprite2D" parent="Connections/LeftConn"]
+modulate = Color(1, 0.670588, 1, 1)
+position = Vector2(-5, -31)
+scale = Vector2(0.05, 0.3)
+texture = ExtResource("9_yejph")
+
+[node name="RightConn" type="Node2D" parent="Connections"]
+rotation = 1.5708
+
+[node name="Sprite2D" type="Sprite2D" parent="Connections/RightConn"]
+modulate = Color(1, 0.670588, 1, 1)
+position = Vector2(-5, -31)
+scale = Vector2(0.05, 0.3)
+texture = ExtResource("9_yejph")
+
+[node name="LabelRow" type="Label" parent="Connections"]
+offset_left = -16.0
+offset_top = -22.0
+offset_right = 24.0
+offset_bottom = 1.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+text = "0"
+
+[node name="LabelLane" type="Label" parent="Connections"]
+offset_left = -23.0
+offset_top = -1.0
+offset_right = 17.0
+offset_bottom = 22.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+text = "0"
+horizontal_alignment = 2
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
