@@ -2,8 +2,6 @@ class_name GameManager
 extends Node
 
 # TODO: find out about showing ads on android version (and maybe web version)
-# TODO: when we hit an element, pop all the same elements above that, and score
-	# for all of them
 
 enum Mode { Light = 0, Shadows = 1 }
 enum MoveDirection { Left = -1, Right = 1 }
@@ -108,11 +106,13 @@ func _process(delta):
 # end built-int
 
 # management
-func trigger_game_over(soul_object: SoulObject = null):
-	var sname = "Quit"
-	if soul_object != null: sname = soul_object.name
-	print("GAME OVER | Trigger: " + sname)
-	get_tree().reload_current_scene() # make something better than this
+func trigger_game_over(_soul_object: SoulObject = null):
+	Globals.light_score = light_score
+	Globals.shadows_score = shadows_score
+	Globals.balance_score = balance_score
+	#get_tree().change_scene_to_file("res://scenes/high_score.tscn")
+	get_tree().reload_current_scene()
+	# TODO show highscore again
 
 func change_mode(new_mode: Mode):
 	self.mode = new_mode
@@ -225,7 +225,6 @@ func check_drop_reseting():
 			reseting_drop = false
 
 func check_needs_falling():
-	#return # TODO: remove this
 	if reseting_drop: return
 	drop += 1
 	update_drop_symbols()
@@ -242,14 +241,12 @@ func clean_up_falling():
 			falling_objects.erase(row)
 
 func move_falling():
-	# todo check if add a new line when moving
 	clean_up_falling()
 	add_falling_line()
 	for row in falling_objects.keys():
 		for lane in falling_objects[row].keys():
 			if falling_objects[row][lane] != null:
 				falling_objects[row][lane].move(grid_size, falling_move_duration)
-	# end move_falling
 
 func add_falling_line():
 	var line = {}
@@ -276,6 +273,7 @@ func add_falling_line():
 		new_obj.check_function = check_clash
 		new_obj.position.x = lane * grid_size + falling_start_x
 		new_obj.position.y = topmost_position
+		new_obj.next_object = topmost_position + grid_size
 		if lane > 0: new_obj.left = line[lane - 1]
 		if b_line != null:
 			new_obj.bottom = b_line[lane]
@@ -360,7 +358,8 @@ func wrong_elements(falling: SoulObject, launch: SoulObject):
 	launched_objects[launch.lane] = null
 	launch.launched = false
 	launch.type = SoulObject.Type.Falling
-	launch.position.y = falling.position.y + grid_size
+	launch.position.y = falling.next_object
+	launch.next_object = launch.position.y + grid_size
 	launch.grid_size = grid_size
 	var row = falling.row - 1
 	if !falling_objects.keys().has(row):

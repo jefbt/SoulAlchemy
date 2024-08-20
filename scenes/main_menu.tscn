@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://5k3dhwklvcoi"]
+
+[ext_resource type="Script" path="res://scripts/main_menu.gd" id="1_8h6ji"]
+
+[node name="MainMenu" type="Node2D"]
+script = ExtResource("1_8h6ji")
+
+[node name="Button" type="Button" parent="."]
+offset_left = 33.5378
+offset_top = 18.0203
+offset_right = 41.5378
+offset_bottom = 26.0203
+text = "Start Game"
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

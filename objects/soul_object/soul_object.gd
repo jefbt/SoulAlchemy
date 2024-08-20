@@ -17,6 +17,7 @@ const ACCELERATION = 500.0
 @onready var label_row = $Connections/LabelRow
 @onready var label_lane = $Connections/LabelLane
 
+@export var debug = false
 @export var element_color: Array[Color] = [
 	Color.hex(0x5DE2E7FF),
 	Color.hex(0xCECECEFF),
@@ -40,6 +41,7 @@ var delta_move := 0.0
 var move_duration := 0.5
 var start_y := 0.0
 var next_y := 0.0
+var next_object := 0.0
 var launch_speed := 50.0
 var check_function : Callable
 var top : SoulObject = null
@@ -70,12 +72,20 @@ func _process(delta):
 		position.y -= launch_speed * delta
 		launch_speed += delta * ACCELERATION
 		if position.y < -400: dismiss()
-	top_conn.visible = top != null
-	bottom_conn.visible = bottom != null
-	left_conn.visible = left != null
-	right_conn.visible = right != null
-	label_row.text = str(row)
-	label_lane.text = str(lane)
+	if debug:
+		top_conn.visible = top != null
+		bottom_conn.visible = bottom != null
+		left_conn.visible = left != null
+		right_conn.visible = right != null
+		label_row.text = str(row)
+		label_lane.text = str(lane)
+	else:
+		top_conn.visible = false
+		bottom_conn.visible = false
+		left_conn.visible = false
+		right_conn.visible = false
+		label_row.text = ""
+		label_lane.text = ""
 
 func _on_area_entered(area):
 	if type != Type.Launch: return
@@ -84,6 +94,7 @@ func _on_area_entered(area):
 	if other.lane != lane: return
 	check_function.call(other, self)
 
+# move_amount is speed for launched, and grid size for falling
 func move(move_amount: float, duration: float = 0):
 	if type == Type.Falling:
 		is_falling = true
@@ -92,8 +103,7 @@ func move(move_amount: float, duration: float = 0):
 		if move_duration <= 0: move_duration = 0.001
 		start_y = position.y
 		next_y = position.y + move_amount
-		#await get_tree().create_timer(duration).timeout
-		#is_falling = false
+		next_object = next_y + move_amount
 	elif type == Type.Launch:
 		launch_speed = move_amount
 		launched = true
