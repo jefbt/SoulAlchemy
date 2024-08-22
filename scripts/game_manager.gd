@@ -110,9 +110,7 @@ func trigger_game_over(_soul_object: SoulObject = null):
 	Globals.light_score = light_score
 	Globals.shadows_score = shadows_score
 	Globals.balance_score = balance_score
-	#get_tree().change_scene_to_file("res://scenes/high_score.tscn")
-	get_tree().reload_current_scene()
-	# TODO show highscore again
+	get_tree().change_scene_to_file("res://scenes/high_score.tscn")
 
 func change_mode(new_mode: Mode):
 	self.mode = new_mode
@@ -227,8 +225,10 @@ func check_drop_reseting():
 func check_needs_falling():
 	if reseting_drop: return
 	drop += 1
-	update_drop_symbols()
-	if drop >= drop_symbols.size(): reseting_drop = true
+	if drop >= drop_symbols.size() + 1:
+		reseting_drop = true
+	else:
+		update_drop_symbols()
 
 func clean_up_falling():
 	for row in falling_objects.keys():
@@ -424,6 +424,7 @@ func score_update():
 	score_balance.text = str(balance_score)
 
 func calc_balance_score():
+	# TODO balance score is not getting the desired results
 	var diff = abs(light_score - shadows_score)
 	var best = max(light_score, shadows_score)
 	var worst = min(light_score, shadows_score)
