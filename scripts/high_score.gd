@@ -3,26 +3,35 @@ extends Node2D
 @onready var light_score_label = $Labels/LightScoreLabel
 @onready var shadows_score_label = $Labels/ShadowsScoreLabel
 @onready var balance_score_label = $Labels/BalanceScoreLabel
-@onready var high_score_label = $Labels/HighScoreLabel
+@onready var play_again_button = $Buttons/PlayAgainButton
+@onready var main_menu_button = $Buttons/MainMenuButton
+@onready var high_name = $Labels/HighName
+@onready var high_light = $Labels/HighLight
+@onready var high_shadows = $Labels/HighShadows
+@onready var high_balance = $Labels/HighBalance
+@onready var player_name_label = $Labels/PlayerNameLabel
 
 func update_score(light_score: int, shadows_score: int, balance_score: int):
-	light_score_label.text = "Light Score: " + str(light_score)
-	shadows_score_label.text = "Shadows Score: " + str(shadows_score)
-	balance_score_label.text = "Balance Score: " + str(balance_score)
-
-	var hs_text = ""
+	light_score_label.text = str(light_score)
+	shadows_score_label.text = str(shadows_score)
+	balance_score_label.text = str(balance_score)
+	player_name_label.text = Save.player_name
+	high_name.text = ""
+	high_light.text = ""
+	high_shadows.text = ""
+	high_balance.text = ""
 	for entry in Save.high_score_table.values():
-		var _name = entry[3]
-		var light = entry[0]
-		var shadows = entry[1]
-		var balance = entry[2]
-		hs_text += _name + ": Light = " + str(light)
-		hs_text += " | Shadows = " + str(shadows)
-		hs_text += " | Balance = " + str(balance)
-		hs_text += "\n"
-	high_score_label.text = hs_text
+		var _name = str(entry[3])
+		var light = str(entry[0])
+		var shadows = str(entry[1])
+		var balance = str(entry[2])
+		high_name.text += _name + "\n"
+		high_light.text += light + "\n"
+		high_shadows.text += shadows + "\n"
+		high_balance.text += balance + "\n"
 
 func _ready():
+	play_again_button.grab_focus()
 	update_score(Globals.light_score, Globals.shadows_score, Globals.balance_score)
 
 func _on_main_menu_button_pressed():
@@ -30,3 +39,23 @@ func _on_main_menu_button_pressed():
 
 func _on_play_again_button_pressed():
 	get_tree().change_scene_to_file("res://scenes/game.tscn")
+
+func press_button():
+	if main_menu_button.has_focus():
+		_on_main_menu_button_pressed()
+	elif play_again_button.has_focus():
+		_on_play_again_button_pressed()
+
+func focus_left():
+	main_menu_button.grab_focus()
+	
+func focus_right():
+	play_again_button.grab_focus()
+	
+func _input(event):
+	if event.is_action_pressed("MoveLeft"): focus_left()
+	elif event.is_action_pressed("MoveRight"): focus_right()
+	#
+	if event.is_action_pressed("Launch"): press_button()
+	if event.is_action_pressed("Cancel"): main_menu_button.grab_focus()
+	if event.is_action_pressed("ToggleMode"): play_again_button.grab_focus()

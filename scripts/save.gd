@@ -1,7 +1,7 @@
 extends Node
 
 var save_path := "user://highscore.sv"
-var player_name := "Love"
+var player_name := "Noname"
 
 var high_score_table : Dictionary = {
 	1: [ 100, 100, 100, "Saitama"],
