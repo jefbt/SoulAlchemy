@@ -34,12 +34,12 @@ outline_size = 10
 outline_color = Color(0.133196, 0.133196, 0.133196, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_m8qh1"]
-font_size = 120
+font_size = 80
 outline_size = 30
 outline_color = Color(0.169245, 0.169245, 0.169245, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_bl4g0"]
-font_size = 60
+font_size = 44
 outline_size = 10
 outline_color = Color(0.190762, 0.190762, 0.190762, 1)
 
@@ -78,7 +78,7 @@ drop_symbols = [NodePath("UI/DropBar/DropSymbol1"), NodePath("UI/DropBar/DropSym
 [node name="SoulObjects" type="Node" parent="GameManager"]
 
 [node name="Target" type="Node2D" parent="GameManager"]
-position = Vector2(269.314, 95.6137)
+position = Vector2(269.314, 107.519)
 
 [node name="BGSprite" type="Sprite2D" parent="GameManager/Target"]
 modulate = Color(0.15645, 0.147, 0.21, 1)
@@ -187,6 +187,10 @@ offset_left = -361.247
 offset_top = -307.898
 offset_right = -231.247
 offset_bottom = -242.898
+theme_override_colors/font_outline_color = Color(0.0846899, 0.0846899, 0.0846899, 1)
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 40
+text = "Quit"
 flat = true
 icon_alignment = 1
 
@@ -247,6 +251,13 @@ theme_override_font_sizes/font_size = 30
 text = "5"
 flat = true
 icon_alignment = 1
+
+[node name="Label" type="Label" parent="GameManager/UI/UIPosition"]
+offset_left = 176.493
+offset_right = 284.493
+offset_bottom = 46.0
+theme_override_font_sizes/font_size = 33
+text = "Match:"
 
 [node name="AutoLaunchOn" type="Node2D" parent="GameManager/UI"]
 z_index = -8
@@ -612,9 +623,9 @@ metadata/_edit_use_anchors_ = true
 [node name="ScoreShadows" type="Label" parent="GameManager/UI/Score"]
 clip_contents = true
 custom_minimum_size = Vector2(168, 0)
-offset_top = 108.681
+offset_top = 106.975
 offset_right = 168.0
-offset_bottom = 169.681
+offset_bottom = 167.975
 theme_override_font_sizes/font_size = 60
 text = "0"
 label_settings = SubResource("LabelSettings_eycg6")
@@ -624,11 +635,10 @@ metadata/_edit_use_anchors_ = true
 
 [node name="Multiplier" type="Label" parent="GameManager/UI/Score"]
 clip_contents = true
-custom_minimum_size = Vector2(168, 0)
-offset_left = 16.6489
-offset_top = 178.681
-offset_right = 184.649
-offset_bottom = 343.681
+offset_left = -34.9417
+offset_top = 181.587
+offset_right = 133.058
+offset_bottom = 291.587
 theme_override_font_sizes/font_size = 60
 text = "1"
 label_settings = SubResource("LabelSettings_m8qh1")
@@ -637,7 +647,7 @@ max_lines_visible = 1
 metadata/_edit_use_anchors_ = true
 
 [node name="MultiTimer" type="Node2D" parent="GameManager/UI/Score/Multiplier"]
-position = Vector2(57.205, 153.404)
+position = Vector2(89.6882, 108)
 
 [node name="Length" type="Node2D" parent="GameManager/UI/Score/Multiplier/MultiTimer"]
 
@@ -648,10 +658,10 @@ scale = Vector2(0.43667, 0.2)
 texture = ExtResource("14_3k7yq")
 
 [node name="MultiX" type="Label" parent="GameManager/UI/Score"]
-offset_left = 16.6489
-offset_top = 178.681
-offset_right = 184.649
-offset_bottom = 343.681
+offset_left = 33.5154
+offset_top = 181.587
+offset_right = 201.515
+offset_bottom = 289.587
 theme_override_font_sizes/font_size = 60
 text = "x"
 label_settings = SubResource("LabelSettings_bl4g0")
@@ -705,6 +715,7 @@ metadata/_edit_use_anchors_ = true
 [node name="Icons" type="Node" parent="GameManager/UI"]
 
 [node name="GiveUpIcon" type="Sprite2D" parent="GameManager/UI/Icons"]
+visible = false
 z_index = -9
 position = Vector2(-264.238, -274.388)
 scale = Vector2(0.599999, 0.5)

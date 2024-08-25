@@ -96,7 +96,6 @@ func _ready():
 	change_mode(mode)
 	set_auto_launch(auto_launch)
 	add_falling_line()
-	add_falling_line()
 	start_queue()
 	update_drop_symbols()
 	score_update()
@@ -267,6 +266,10 @@ func add_falling_line():
 	if falling_objects.keys().has(row):
 		b_line = falling_objects[row]
 	row += 1
+	if topmost_position > falling_start_y:
+		topmost_position = falling_start_y
+	if falling_objects.size() == 0:
+		row = 0
 	for lane in grid_count_x: line[lane] = null
 	for lane in grid_count_x:
 		var new_obj = SOUL_OBJECT.instantiate()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://c2q35oixaw23s"]
+[gd_scene load_steps=11 format=3 uid="uid://c2q35oixaw23s"]
 
 [ext_resource type="Script" path="res://scripts/high_score.gd" id="1_2dhqc"]
 [ext_resource type="Texture2D" uid="uid://danqjkncnylbd" path="res://assets/art/backgroundEmpty.png" id="2_jys0q"]
@@ -6,6 +6,10 @@
 [ext_resource type="Texture2D" uid="uid://c7ivf8wxpxr4b" path="res://assets/art/yellow_body_squircle.png" id="4_hshew"]
 [ext_resource type="Texture2D" uid="uid://bmeq7ox550f1q" path="res://assets/art/pink_body_rhombus.png" id="5_ys3xn"]
 [ext_resource type="Texture2D" uid="uid://bgws787suyx8s" path="res://assets/art/tileGrey_02.png" id="6_t127a"]
+[ext_resource type="Texture2D" uid="uid://bqhiq8p2o2lho" path="res://assets/art/particleYellow_6.png" id="7_6eij7"]
+[ext_resource type="Texture2D" uid="uid://6y7mu3vjeohj" path="res://assets/art/particleBlue_6.png" id="8_bfhtl"]
+[ext_resource type="Texture2D" uid="uid://hr5cx6qinrms" path="res://assets/art/particleYellow_3.png" id="9_svnjb"]
+[ext_resource type="Texture2D" uid="uid://enbuvaorlog7" path="res://assets/art/particleBlue_3.png" id="10_w4vtb"]
 
 [node name="HighScore" type="Node2D"]
 script = ExtResource("1_2dhqc")
@@ -30,8 +34,8 @@ texture = ExtResource("2_jys0q")
 
 [node name="HighscoreLabel" type="Label" parent="Labels"]
 offset_top = 9.0
-offset_right = 1154.0
-offset_bottom = 56.0
+offset_right = 196.0
+offset_bottom = 93.0
 theme_override_font_sizes/font_size = 24
 text = "HIGHSCORE"
 horizontal_alignment = 1
@@ -281,6 +285,34 @@ z_index = -3
 position = Vector2(568.619, 129.449)
 scale = Vector2(5.43164, 0.438204)
 texture = ExtResource("6_t127a")
+
+[node name="BalanceStarL" type="Sprite2D" parent="UI"]
+modulate = Color(1, 1, 1, 0.831373)
+z_index = -10
+position = Vector2(925.456, 29.1866)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("7_6eij7")
+
+[node name="BalanceStarS" type="Sprite2D" parent="UI"]
+modulate = Color(1, 1, 1, 0.831373)
+z_index = -10
+position = Vector2(925.456, 29.1866)
+rotation = 0.785398
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("8_bfhtl")
+
+[node name="LightStar" type="Sprite2D" parent="UI"]
+z_index = -10
+position = Vector2(664.345, 27.4518)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("9_svnjb")
+
+[node name="LightShadows" type="Sprite2D" parent="UI"]
+z_index = -10
+position = Vector2(790.544, 30.0505)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("10_w4vtb")
+flip_v = true
 
 [connection signal="pressed" from="Buttons/MainMenuButton" to="." method="_on_main_menu_button_pressed"]
 [connection signal="pressed" from="Buttons/PlayAgainButton" to="." method="_on_play_again_button_pressed"]
