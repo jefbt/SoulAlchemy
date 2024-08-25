@@ -1,15 +1,124 @@
-[gd_scene load_steps=2 format=3 uid="uid://5k3dhwklvcoi"]
+[gd_scene load_steps=7 format=3 uid="uid://5k3dhwklvcoi"]
 
 [ext_resource type="Script" path="res://scripts/main_menu.gd" id="1_8h6ji"]
+[ext_resource type="Texture2D" uid="uid://danqjkncnylbd" path="res://assets/art/backgroundEmpty.png" id="2_yqqkm"]
+[ext_resource type="Texture2D" uid="uid://bmeq7ox550f1q" path="res://assets/art/pink_body_rhombus.png" id="3_sgvtq"]
+[ext_resource type="Texture2D" uid="uid://cvqupt3mbl104" path="res://assets/art/purple_body_squircle.png" id="4_d2n2w"]
+[ext_resource type="Texture2D" uid="uid://c7ivf8wxpxr4b" path="res://assets/art/yellow_body_squircle.png" id="5_i7jfd"]
+[ext_resource type="Texture2D" uid="uid://bjjkilelbr22" path="res://assets/art/pipeGrey_32.png" id="6_pkgjx"]
 
 [node name="MainMenu" type="Node2D"]
 script = ExtResource("1_8h6ji")
 
-[node name="Button" type="Button" parent="."]
-offset_left = 33.5378
-offset_top = 18.0203
-offset_right = 41.5378
-offset_bottom = 26.0203
-text = "Start Game"
+[node name="Background" type="Node2D" parent="."]
 
-[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[node name="Sprite2D" type="Sprite2D" parent="Background"]
+modulate = Color(0.4293, 0.434335, 0.53, 1)
+z_index = -20
+position = Vector2(319, 325)
+scale = Vector2(0.640461, 0.640461)
+texture = ExtResource("2_yqqkm")
+
+[node name="Sprite2D2" type="Sprite2D" parent="Background"]
+modulate = Color(0.4293, 0.434335, 0.53, 1)
+z_index = -21
+position = Vector2(973, 325)
+scale = Vector2(0.640461, 0.640461)
+texture = ExtResource("2_yqqkm")
+
+[node name="StartGameButton" type="Button" parent="."]
+offset_left = 453.551
+offset_top = 440.204
+offset_right = 763.551
+offset_bottom = 509.204
+theme_override_colors/font_color = Color(0.259734, 0.0903729, 0.406075, 1)
+theme_override_font_sizes/font_size = 44
+text = "Start Game"
+flat = true
+
+[node name="YellowBodySquircle2" type="Sprite2D" parent="StartGameButton"]
+z_index = -1
+position = Vector2(156.298, 35.872)
+scale = Vector2(1.97431, 0.397985)
+texture = ExtResource("5_i7jfd")
+
+[node name="QuitButton" type="Button" parent="."]
+offset_left = 325.0
+offset_top = 440.204
+offset_right = 421.0
+offset_bottom = 509.205
+theme_override_colors/font_color = Color(0.259734, 0.0903729, 0.406075, 1)
+theme_override_colors/font_outline_color = Color(0.983791, 0.933012, 0.724922, 1)
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 24
+text = "Quit"
+flat = true
+
+[node name="PinkBodyRhombus2" type="Sprite2D" parent="QuitButton"]
+z_index = -1
+position = Vector2(47.664, 34.5537)
+scale = Vector2(0.56, 0.379581)
+texture = ExtResource("3_sgvtq")
+
+[node name="HighScoreButton" type="Button" parent="."]
+offset_left = 787.388
+offset_top = 440.204
+offset_right = 993.391
+offset_bottom = 509.204
+theme_override_colors/font_color = Color(0.945572, 0.774887, 0.592479, 1)
+theme_override_colors/font_outline_color = Color(0.983791, 0.933012, 0.724922, 1)
+theme_override_font_sizes/font_size = 33
+text = "High Score"
+flat = true
+
+[node name="PurpleBodySquircle" type="Sprite2D" parent="HighScoreButton"]
+z_index = -1
+position = Vector2(101.655, 35.6608)
+scale = Vector2(1.23126, 0.394536)
+texture = ExtResource("4_d2n2w")
+
+[node name="PlayerName" type="LineEdit" parent="."]
+offset_left = 453.551
+offset_top = 522.144
+offset_right = 763.551
+offset_bottom = 591.144
+placeholder_text = "Your name here"
+flat = true
+
+[node name="TileGrey02" type="Sprite2D" parent="PlayerName"]
+modulate = Color(0.607291, 0.397549, 0.487507, 1)
+z_index = -1
+position = Vector2(154.63, 35.1326)
+scale = Vector2(1.81456, 0.691657)
+texture = ExtResource("6_pkgjx")
+
+[node name="PinkBodyRhombus" type="Sprite2D" parent="."]
+position = Vector2(576.122, 284.694)
+texture = ExtResource("3_sgvtq")
+
+[node name="PurpleBodySquircle2" type="Sprite2D" parent="."]
+position = Vector2(455, 340)
+texture = ExtResource("4_d2n2w")
+
+[node name="YellowBodySquircle" type="Sprite2D" parent="."]
+position = Vector2(713.163, 260)
+texture = ExtResource("5_i7jfd")
+
+[node name="Label" type="Label" parent="."]
+offset_left = 325.0
+offset_top = 224.39
+offset_right = 843.0
+offset_bottom = 334.39
+theme_override_colors/font_color = Color(0.985966, 0.765961, 0.343139, 1)
+theme_override_colors/font_outline_color = Color(0.256654, 0.214726, 0.454369, 1)
+theme_override_constants/outline_size = 35
+theme_override_font_sizes/font_size = 80
+text = "Soul Alchemy"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="pressed" from="StartGameButton" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="QuitButton" to="." method="_on_quit_button_pressed"]
+[connection signal="pressed" from="HighScoreButton" to="." method="_on_high_score_button_pressed"]
+[connection signal="text_changed" from="PlayerName" to="." method="_on_player_name_text_changed"]
+[connection signal="text_submitted" from="PlayerName" to="." method="_on_player_name_text_submitted"]

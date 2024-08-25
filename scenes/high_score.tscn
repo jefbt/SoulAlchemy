@@ -1,30 +1,84 @@
-[gd_scene load_steps=2 format=3 uid="uid://c2q35oixaw23s"]
+[gd_scene load_steps=3 format=3 uid="uid://c2q35oixaw23s"]
 
-[ext_resource type="Script" path="res://scenes/high_score.gd" id="1_2dhqc"]
+[ext_resource type="Script" path="res://scripts/high_score.gd" id="1_2dhqc"]
+[ext_resource type="Texture2D" uid="uid://danqjkncnylbd" path="res://assets/art/backgroundEmpty.png" id="2_jys0q"]
 
 [node name="HighScore" type="Node2D"]
 script = ExtResource("1_2dhqc")
 
-[node name="LightScoreLabel" type="Label" parent="."]
+[node name="Background" type="Node2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="Background"]
+modulate = Color(0.4293, 0.434335, 0.53, 1)
+z_index = -20
+position = Vector2(319, 325)
+scale = Vector2(0.640461, 0.640461)
+texture = ExtResource("2_jys0q")
+
+[node name="Sprite2D2" type="Sprite2D" parent="Background"]
+modulate = Color(0.4293, 0.434335, 0.53, 1)
+z_index = -21
+position = Vector2(973, 325)
+scale = Vector2(0.640461, 0.640461)
+texture = ExtResource("2_jys0q")
+
+[node name="Labels" type="Node2D" parent="."]
+
+[node name="LightScoreLabel" type="Label" parent="Labels"]
 modulate = Color(1, 1, 0.509804, 1)
 offset_left = 181.0
 offset_top = 115.0
-offset_right = 242.0
+offset_right = 284.0
 offset_bottom = 138.0
 text = "Light Score: 0"
 
-[node name="ShadowsScoreLabel" type="Label" parent="."]
+[node name="ShadowsScoreLabel" type="Label" parent="Labels"]
 modulate = Color(0.415686, 0.603922, 1, 1)
 offset_left = 181.0
 offset_top = 138.0
-offset_right = 284.0
+offset_right = 319.0
 offset_bottom = 161.0
 text = "Shadows  Score: 0"
 
-[node name="BalanceScoreLabel" type="Label" parent="."]
+[node name="BalanceScoreLabel" type="Label" parent="Labels"]
 modulate = Color(0.766901, 0.726296, 0.726705, 1)
 offset_left = 181.0
 offset_top = 177.949
 offset_right = 319.0
 offset_bottom = 200.949
 text = "Balance  Score: 0"
+
+[node name="HighScoreLabel" type="Label" parent="Labels"]
+offset_left = 439.0
+offset_top = 115.0
+offset_right = 962.0
+offset_bottom = 493.0
+text = "1: 
+2
+3
+4
+5
+6
+7
+8
+9
+10"
+
+[node name="Buttons" type="Node2D" parent="."]
+
+[node name="MainMenuButton" type="Button" parent="Buttons"]
+offset_left = 122.053
+offset_top = 392.886
+offset_right = 130.053
+offset_bottom = 400.886
+text = "Main Menu"
+
+[node name="PlayAgainButton" type="Button" parent="Buttons"]
+offset_left = 122.053
+offset_top = 436.54
+offset_right = 218.053
+offset_bottom = 467.54
+text = "Play Again"
+
+[connection signal="pressed" from="Buttons/MainMenuButton" to="." method="_on_main_menu_button_pressed"]
+[connection signal="pressed" from="Buttons/PlayAgainButton" to="." method="_on_play_again_button_pressed"]

@@ -77,6 +77,9 @@ static var bottom_line : float = 0.0
 
 # built-in functions
 func _ready():
+	Globals.light_score = 0
+	Globals.shadows_score = 0
+	Globals.balance_score = 0
 	var size_x = grid_size * grid_count_x
 	var size_y = grid_size * grid_count_y
 	falling_start_x = -size_x / 2.0 + grid_size / 2
@@ -98,6 +101,7 @@ func _ready():
 	update_drop_symbols()
 	score_update()
 	update_target_sprite()
+	Save.load_highscore()
 
 func _process(delta):
 	input_modifier = Input.is_action_pressed("LaunchLaneTrigger")
@@ -110,6 +114,7 @@ func trigger_game_over(_soul_object: SoulObject = null):
 	Globals.light_score = light_score
 	Globals.shadows_score = shadows_score
 	Globals.balance_score = balance_score
+	Save.check_score(light_score, shadows_score, balance_score)
 	get_tree().change_scene_to_file("res://scenes/high_score.tscn")
 
 func change_mode(new_mode: Mode):
@@ -425,9 +430,9 @@ func score_update():
 
 func calc_balance_score():
 	# TODO balance score is not getting the desired results
-	var diff = abs(light_score - shadows_score)
-	var best = max(light_score, shadows_score)
-	var worst = min(light_score, shadows_score)
+	var diff = float(abs(light_score - shadows_score))
+	var best = float(max(light_score, shadows_score))
+	var worst = float(min(light_score, shadows_score))
 	var scoring = 0.0
 	if diff == 0:
 		scoring = 2.0 * worst + best

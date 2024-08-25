@@ -1,6 +1,7 @@
-[gd_scene load_steps=25 format=3 uid="uid://jxmlqa5oskle"]
+[gd_scene load_steps=26 format=3 uid="uid://jxmlqa5oskle"]
 
 [ext_resource type="Script" path="res://scripts/game_manager.gd" id="1_faqmt"]
+[ext_resource type="Texture2D" uid="uid://danqjkncnylbd" path="res://assets/art/backgroundEmpty.png" id="1_ggoex"]
 [ext_resource type="Texture2D" uid="uid://d3vqxt5do8kf1" path="res://assets/art/ship_D.png" id="2_4ndik"]
 [ext_resource type="Texture2D" uid="uid://tnyxbpaj6bwh" path="res://assets/art/meteor_detailedLarge.png" id="3_daghw"]
 [ext_resource type="Texture2D" uid="uid://dvli1ej3wu0yw" path="res://assets/art/purple_body_square.png" id="3_t4dyr"]
@@ -49,6 +50,23 @@ outline_color = Color(0.180005, 0.180005, 0.180005, 1)
 shadow_color = Color(0.172549, 0.172549, 0.172549, 0)
 
 [node name="Game" type="Node2D"]
+
+[node name="Background" type="Node2D" parent="."]
+position = Vector2(-593.339, -325)
+
+[node name="Sprite2D" type="Sprite2D" parent="Background"]
+modulate = Color(0.4293, 0.434335, 0.53, 1)
+z_index = -20
+position = Vector2(319, 325)
+scale = Vector2(0.640461, 0.640461)
+texture = ExtResource("1_ggoex")
+
+[node name="Sprite2D2" type="Sprite2D" parent="Background"]
+modulate = Color(0.4293, 0.434335, 0.53, 1)
+z_index = -21
+position = Vector2(973, 325)
+scale = Vector2(0.640461, 0.640461)
+texture = ExtResource("1_ggoex")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
