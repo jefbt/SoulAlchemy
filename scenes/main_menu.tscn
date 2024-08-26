@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://5k3dhwklvcoi"]
+[gd_scene load_steps=9 format=3 uid="uid://5k3dhwklvcoi"]
 
 [ext_resource type="Script" path="res://scripts/main_menu.gd" id="1_8h6ji"]
 [ext_resource type="Texture2D" uid="uid://danqjkncnylbd" path="res://assets/art/backgroundEmpty.png" id="2_yqqkm"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://c7ivf8wxpxr4b" path="res://assets/art/yellow_body_squircle.png" id="5_i7jfd"]
 [ext_resource type="Texture2D" uid="uid://bjjkilelbr22" path="res://assets/art/pipeGrey_32.png" id="6_pkgjx"]
 [ext_resource type="AudioStream" uid="uid://blvpx7jml5bfh" path="res://assets/audio/Offline [Pause Menu Music I].mp3" id="7_t1ocv"]
+[ext_resource type="PackedScene" uid="uid://blvh615ls11yh" path="res://objects/toggle_sound/toggle_sound.tscn" id="8_dn6m5"]
 
 [node name="MainMenu" type="Node2D"]
 script = ExtResource("1_8h6ji")
@@ -120,6 +121,10 @@ vertical_alignment = 1
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("7_t1ocv")
+bus = &"Music"
+
+[node name="ToggleSound" parent="." instance=ExtResource("8_dn6m5")]
+position = Vector2(272.099, 477.443)
 
 [connection signal="pressed" from="StartGameButton" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="QuitButton" to="." method="_on_quit_button_pressed"]

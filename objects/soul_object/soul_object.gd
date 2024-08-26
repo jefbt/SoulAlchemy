@@ -9,6 +9,9 @@ const ACCELERATION = 500.0
 @onready var sprite_light = $SpriteLight
 @onready var sprite_shadows = $SpriteShadows
 
+@onready var wrong_sfx = $WrongSFX
+@onready var launch_sfx = $LaunchSFX
+
 @onready var top_conn = $Connections/TopConn
 @onready var bottom_conn = $Connections/BottomConn
 @onready var left_conn = $Connections/LeftConn

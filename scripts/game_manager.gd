@@ -1,14 +1,16 @@
 class_name GameManager
 extends Node
 
-# TODO: find out about showing ads on android version (and maybe web version)
+# TODO find out about showing ads on android version (and maybe web version)
+# TODO quit game if cancel button pressed
 # TODO credits (add credits screen):
 	# light https://opengameart.org/content/awake-megawall-10
 	# shadows https://opengameart.org/content/crystal-cave-song18
 	# highscore https://opengameart.org/content/bouncy-hamster-dancing-menu-music
 	# menu 1 https://opengameart.org/content/doodle-menu-like-song
 	# menu 2 https://opengameart.org/content/pause-menu-music
-# TODO sound and music toggle on/off
+# TODO add a can't launch animation to the object
+# TODO add different sound effects for each element, like a swoosh for fire, ping for metal etc
 
 enum Mode { Light = 0, Shadows = 1 }
 enum MoveDirection { Left = -1, Right = 1 }
@@ -27,8 +29,15 @@ const SOUL_OBJECT = preload("res://objects/soul_object/soul_object.tscn")
 @onready var multiplier = $UI/Score/Multiplier
 @onready var score_balance = $UI/Score/Balance/ScoreBalance
 
-@onready var music_light = $MusicLight
-@onready var music_shadows = $MusicShadows
+@onready var music_light = $Audio/MusicLight
+@onready var music_shadows = $Audio/MusicShadows
+@onready var pop_sfx = $Audio/PopSFX
+@onready var quit_sfx = $Audio/QuitSFX
+@onready var turn_off_auto_launch_sfx = $Audio/TurnOffAutoLaunchSFX
+@onready var turn_on_auto_launch_sfx_2 = $Audio/TurnOnAutoLaunchSFX2
+@onready var toggle_mode_sfx = $Audio/ToggleModeSFX
+@onready var cannot_launch_sfx = $Audio/CannotLaunchSFX
+@onready var toggle_sound = $UI/Icons/ToggleSound
 
 @onready var target_sprite_0 = $Target/TargetSprite0
 @onready var target_sprite_1 = $Target/TargetSprite1
@@ -79,6 +88,9 @@ var score_multiplier := 1.0
 var reduce_multiplier_time := -1.0
 var reduce_delta := 0.0
 var reset_delta := false
+var is_game_over := false
+
+var toggle_sound_button : Button
 
 const REDUCE_MULTIPLIER_DURATION = 6.0
 
@@ -87,6 +99,7 @@ static var bottom_line : float = 0.0
 
 # built-in functions
 func _ready():
+	is_game_over = false
 	Globals.light_score = 0
 	Globals.shadows_score = 0
 	Globals.balance_score = 0
@@ -113,6 +126,7 @@ func _ready():
 	Save.load_highscore()
 
 func _process(delta):
+	if is_game_over: return
 	input_modifier = Input.is_action_pressed("LaunchLaneTrigger")
 	check_drop_reseting()
 	check_score_multiplier(delta)
@@ -124,6 +138,9 @@ func trigger_game_over(_soul_object: SoulObject = null):
 	Globals.shadows_score = shadows_score
 	Globals.balance_score = balance_score
 	Save.check_score(light_score, shadows_score, balance_score)
+	quit_sfx.play()
+	is_game_over = true
+	await get_tree().create_timer(0.5).timeout
 	get_tree().change_scene_to_file("res://scenes/high_score.tscn")
 
 func change_mode(new_mode: Mode):
@@ -147,6 +164,8 @@ func change_mode(new_mode: Mode):
 	update_target_sprite()
 
 func toggle_mode():
+	if is_game_over: return
+	toggle_mode_sfx.play()
 	if mode == Mode.Light: change_mode(Mode.Shadows)
 	else: change_mode(Mode.Light)
 # end management
@@ -203,6 +222,7 @@ func update_selected():
 	selected_object.position.x = selected_object.lane * grid_size + falling_start_x
 
 func move_selected(direction):
+	if is_game_over: return
 	if selected_object == null: return
 	var lane = selected_object.lane + int(direction)
 	if lane < 0: lane = 0
@@ -283,7 +303,7 @@ func add_falling_line():
 		b_line = falling_objects[row]
 	row += 1
 	if topmost_position > falling_start_y:
-		topmost_position = falling_start_y
+		topmost_position = falling_start_y - grid_size
 	if falling_objects.size() == 0:
 		row = 0
 	for lane in grid_count_x: line[lane] = null
@@ -312,8 +332,11 @@ func add_falling_line():
 
 # LAUCH region
 func launch_selected():
+	if is_game_over: return
 	if selected_object == null: return
-	if launched_objects[selected_object.lane] != null: return
+	if launched_objects[selected_object.lane] != null:
+		cannot_launch_sfx.play()
+		return
 	launch_obj(selected_object)
 	launch_lane = selected_object.lane
 	selected_object = null
@@ -327,6 +350,7 @@ func launch_obj(obj: SoulObject):
 	obj.position.x = obj.lane * grid_size + falling_start_x
 	obj.position.y = launch_y
 	obj.move(launch_speed)
+	obj.launch_sfx.play()
 	launched_objects[obj.lane] = obj
 	check_needs_falling()
 
@@ -350,6 +374,7 @@ func check_clash(falling: SoulObject, launch: SoulObject):
 	if wanted < 0: wanted = SoulObject.Element.size() - 1
 	if wanted >= SoulObject.Element.size(): wanted = 0
 	var passed = int(launch.element) == wanted
+	#passed = true # TODO remove this
 	if passed: match_elements(falling, launch)
 	else: wrong_elements(falling, launch)
 
@@ -375,6 +400,7 @@ func match_elements(falling: SoulObject, launch: SoulObject):
 	var extra_multi = 1.0 + float(extra) / 5.0
 	var extra_score = int(float(extra) * extra_multi)
 	score(extra_score + 1)
+	pop_sfx.play()
 	falling.dismiss()
 	launch.dismiss()
 	
@@ -403,6 +429,7 @@ func wrong_elements(falling: SoulObject, launch: SoulObject):
 	if launch.position.y >= bottom_line:
 		launch.hit_bottom()
 	wrong()
+	launch.wrong_sfx.play()
 # end LAUNCH
 
 # extra
@@ -474,11 +501,14 @@ func score(objects_count: int = 1):
 	score_update()
 
 func set_auto_launch(enable : bool):
+	if enable: turn_on_auto_launch_sfx_2.play()
+	else: turn_off_auto_launch_sfx.play()
 	auto_launch = enable
 	auto_launch_off.visible = !auto_launch
 	auto_launch_on.visible = auto_launch
 
 func toggle_auto_launch():
+	if is_game_over: return
 	set_auto_launch(!auto_launch)
 
 func wrong():
@@ -504,6 +534,7 @@ func check_score_multiplier(delta):
 
 # input events
 func handle_lane_input(lane: int, modifier: bool = false):
+	if is_game_over: return
 	if selected_object == null: return
 	selected_object.lane = lane
 	if auto_launch != modifier:
@@ -513,8 +544,12 @@ func handle_lane_input(lane: int, modifier: bool = false):
 
 func handle_move_input(direction: int):
 	move_selected(direction)
+	
+func toggle_audio():
+	toggle_sound.toggle()
 
 func _input(event):
+	if is_game_over: return
 	for n in grid_count_x:
 		if event.is_action_pressed("Lane" + str(n)): handle_lane_input(n, input_modifier)
 	#
@@ -524,6 +559,8 @@ func _input(event):
 	if event.is_action_pressed("Launch"): launch_selected()
 	if event.is_action_pressed("ToggleAutoLaunch"): toggle_auto_launch()
 	if event.is_action_pressed("ToggleMode"): toggle_mode()
+	if event.is_action_pressed("Cancel"): _on_give_up_pressed()
+	if event.is_action_pressed("ToggleAudio"): toggle_audio()
 	
 	# TODO: remove these later
 	if event.is_action_pressed("DebugPlus"):

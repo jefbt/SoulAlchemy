@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cb7y0p4mv3qhc"
-path="res://.godot/imported/backgroundEmpty.png-97c1060c4467933df0202ba9f3f4670d.ctex"
+uid="uid://ccywrme38786k"
+path="res://.godot/imported/musicOff.png-d809d956214be5c4ccea6579d668a188.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://objects/soul_object/backgroundEmpty.png"
-dest_files=["res://.godot/imported/backgroundEmpty.png-97c1060c4467933df0202ba9f3f4670d.ctex"]
+source_file="res://assets/art/musicOff.png"
+dest_files=["res://.godot/imported/musicOff.png-d809d956214be5c4ccea6579d668a188.ctex"]
 
 [params]
 

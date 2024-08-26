@@ -11,6 +11,9 @@ extends Node2D
 @onready var high_balance = $Labels/HighBalance
 @onready var player_name_label = $Labels/PlayerNameLabel
 @onready var audio_stream_player = $AudioStreamPlayer
+@onready var toggle_sound = $ToggleSound
+
+var toggle_sound_button : Button
 
 func update_score(light_score: int, shadows_score: int, balance_score: int):
 	light_score_label.text = str(light_score)
@@ -32,6 +35,7 @@ func update_score(light_score: int, shadows_score: int, balance_score: int):
 		high_balance.text += balance + "\n"
 
 func _ready():
+	toggle_sound_button = toggle_sound.get_child(0) as Button
 	play_again_button.grab_focus()
 	update_score(Globals.light_score, Globals.shadows_score, Globals.balance_score)
 	audio_stream_player.play(Globals.music_highscore)
@@ -51,10 +55,16 @@ func press_button():
 		_on_play_again_button_pressed()
 
 func focus_left():
-	main_menu_button.grab_focus()
+	if main_menu_button.has_focus():
+		toggle_sound_button.grab_focus()
+	elif play_again_button.has_focus():
+		main_menu_button.grab_focus()
 	
 func focus_right():
-	play_again_button.grab_focus()
+	if main_menu_button.has_focus():
+		play_again_button.grab_focus()
+	elif toggle_sound_button.has_focus():
+		main_menu_button.grab_focus()
 	
 func _input(event):
 	if event.is_action_pressed("MoveLeft"): focus_left()

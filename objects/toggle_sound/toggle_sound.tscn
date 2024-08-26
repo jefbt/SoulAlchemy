@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://blvh615ls11yh"]
+
+[ext_resource type="Script" path="res://objects/toggle_sound/toggle_sound.gd" id="1_ebqt4"]
+[ext_resource type="Texture2D" uid="uid://ccywrme38786k" path="res://assets/art/musicOff.png" id="2_od0ha"]
+[ext_resource type="Texture2D" uid="uid://csyt2xn55nsb1" path="res://assets/art/musicOn.png" id="3_vkc6q"]
+[ext_resource type="Texture2D" uid="uid://bgws787suyx8s" path="res://assets/art/tileGrey_02.png" id="4_d432o"]
+
+[node name="ToggleSound" type="Node2D"]
+script = ExtResource("1_ebqt4")
+
+[node name="Button" type="Button" parent="."]
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 22.0
+offset_bottom = 21.0
+flat = true
+
+[node name="MusicOff" type="Sprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_od0ha")
+
+[node name="MusicOn" type="Sprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("3_vkc6q")
+
+[node name="TileGrey02" type="Sprite2D" parent="."]
+modulate = Color(0.266575, 0.266575, 0.266575, 1)
+z_index = -1
+position = Vector2(0.789192, 0.524223)
+scale = Vector2(0.226387, 0.476091)
+texture = ExtResource("4_d432o")
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

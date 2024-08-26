@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://jxmlqa5oskle"]
+[gd_scene load_steps=35 format=3 uid="uid://jxmlqa5oskle"]
 
 [ext_resource type="Script" path="res://scripts/game_manager.gd" id="1_faqmt"]
 [ext_resource type="Texture2D" uid="uid://danqjkncnylbd" path="res://assets/art/backgroundEmpty.png" id="1_ggoex"]
@@ -20,8 +20,15 @@
 [ext_resource type="Texture2D" uid="uid://bgws787suyx8s" path="res://assets/art/tileGrey_02.png" id="14_3k7yq"]
 [ext_resource type="Texture2D" uid="uid://6y7mu3vjeohj" path="res://assets/art/particleBlue_6.png" id="14_7l0o1"]
 [ext_resource type="Texture2D" uid="uid://ckhe6hytlq6x6" path="res://assets/art/icon_crossSmall.png" id="19_2ug6j"]
+[ext_resource type="PackedScene" uid="uid://blvh615ls11yh" path="res://objects/toggle_sound/toggle_sound.tscn" id="21_2smhk"]
 [ext_resource type="AudioStream" uid="uid://bsx82d1owngdf" path="res://assets/audio/awake10_megaWall.mp3" id="21_rl30s"]
 [ext_resource type="AudioStream" uid="uid://fapfib45o6qt" path="res://assets/audio/song18.mp3" id="22_6by8q"]
+[ext_resource type="AudioStream" uid="uid://cfnhgetreklbv" path="res://assets/audio/maximize_006.ogg" id="23_b4kby"]
+[ext_resource type="AudioStream" uid="uid://bj7fh5r1k0s0o" path="res://assets/audio/select_005.ogg" id="24_0ju1t"]
+[ext_resource type="AudioStream" uid="uid://cp0h3m2q581a" path="res://assets/audio/question_002.ogg" id="24_kp2a2"]
+[ext_resource type="AudioStream" uid="uid://bm5pywcdxwe2d" path="res://assets/audio/switch_002.ogg" id="25_28k7g"]
+[ext_resource type="AudioStream" uid="uid://oicxuiecc0lp" path="res://assets/audio/tick_002.ogg" id="25_s16m3"]
+[ext_resource type="AudioStream" uid="uid://dexu5ngol3mrv" path="res://assets/audio/switch_006.ogg" id="26_oer5p"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_hwoe0"]
 font_size = 44
@@ -324,6 +331,7 @@ flip_v = true
 [node name="Light" type="Node2D" parent="GameManager/UI"]
 
 [node name="FallingBoard" type="Sprite2D" parent="GameManager/UI/Light"]
+modulate = Color(0.808998, 0.808998, 0.808998, 1)
 self_modulate = Color(0.435192, 0.435192, 0.435192, 1)
 z_index = -10
 position = Vector2(0, -97.5)
@@ -331,6 +339,7 @@ scale = Vector2(2.03125, 2.84375)
 texture = ExtResource("9_2bl7d")
 
 [node name="LauchBoard" type="Sprite2D" parent="GameManager/UI/Light"]
+modulate = Color(0.808998, 0.808998, 0.808998, 1)
 self_modulate = Color(0.435192, 0.435192, 0.435192, 1)
 z_index = -10
 position = Vector2(0, 162.5)
@@ -339,6 +348,7 @@ texture = ExtResource("9_2bl7d")
 flip_v = true
 
 [node name="LaunchBack" type="Sprite2D" parent="GameManager/UI/Light"]
+modulate = Color(0.808998, 0.808998, 0.808998, 1)
 z_index = -10
 position = Vector2(0, 292.5)
 scale = Vector2(1.21875, 0.40625)
@@ -346,6 +356,7 @@ texture = ExtResource("9_2bl7d")
 flip_v = true
 
 [node name="GiveUpBack" type="Sprite2D" parent="GameManager/UI/Light"]
+modulate = Color(0.808998, 0.808998, 0.808998, 1)
 z_index = -10
 position = Vector2(-263.493, -275.398)
 scale = Vector2(0.809316, 0.40625)
@@ -353,12 +364,14 @@ texture = ExtResource("9_2bl7d")
 flip_v = true
 
 [node name="LaunchIcon" type="Sprite2D" parent="GameManager/UI/Light"]
+modulate = Color(0.808998, 0.808998, 0.808998, 1)
 z_index = -9
 position = Vector2(0, 289.827)
 scale = Vector2(1, 0.7)
 texture = ExtResource("2_4ndik")
 
 [node name="LeftIcon" type="Sprite2D" parent="GameManager/UI/Light"]
+modulate = Color(0.808998, 0.808998, 0.808998, 1)
 z_index = -9
 position = Vector2(-132.839, 293.441)
 rotation = -1.5708
@@ -366,6 +379,7 @@ scale = Vector2(0.5, 0.5)
 texture = ExtResource("2_4ndik")
 
 [node name="RightIcon" type="Sprite2D" parent="GameManager/UI/Light"]
+modulate = Color(0.808998, 0.808998, 0.808998, 1)
 z_index = -9
 position = Vector2(132.839, 293.441)
 rotation = -1.5708
@@ -374,6 +388,7 @@ texture = ExtResource("2_4ndik")
 flip_v = true
 
 [node name="LeftBack" type="Sprite2D" parent="GameManager/UI/Light"]
+modulate = Color(0.808998, 0.808998, 0.808998, 1)
 z_index = -10
 position = Vector2(-130, 292.5)
 scale = Vector2(0.40625, 0.40625)
@@ -381,6 +396,7 @@ texture = ExtResource("10_a4m6f")
 flip_v = true
 
 [node name="RightBack" type="Sprite2D" parent="GameManager/UI/Light"]
+modulate = Color(0.808998, 0.808998, 0.808998, 1)
 z_index = -10
 position = Vector2(130, 292.5)
 scale = Vector2(0.40625, 0.40625)
@@ -388,6 +404,7 @@ texture = ExtResource("10_a4m6f")
 flip_v = true
 
 [node name="Back1" type="Sprite2D" parent="GameManager/UI/Light"]
+modulate = Color(0.808998, 0.808998, 0.808998, 1)
 z_index = -10
 position = Vector2(-130, 227.5)
 scale = Vector2(0.40625, 0.40625)
@@ -395,6 +412,7 @@ texture = ExtResource("10_a4m6f")
 flip_v = true
 
 [node name="Back2" type="Sprite2D" parent="GameManager/UI/Light"]
+modulate = Color(0.808998, 0.808998, 0.808998, 1)
 z_index = -10
 position = Vector2(-65, 227.51)
 scale = Vector2(0.40625, 0.406123)
@@ -402,6 +420,7 @@ texture = ExtResource("10_a4m6f")
 flip_v = true
 
 [node name="Back3" type="Sprite2D" parent="GameManager/UI/Light"]
+modulate = Color(0.808998, 0.808998, 0.808998, 1)
 z_index = -10
 position = Vector2(1.66893e-06, 227.51)
 scale = Vector2(0.40625, 0.406123)
@@ -409,6 +428,7 @@ texture = ExtResource("10_a4m6f")
 flip_v = true
 
 [node name="Back4" type="Sprite2D" parent="GameManager/UI/Light"]
+modulate = Color(0.808998, 0.808998, 0.808998, 1)
 z_index = -10
 position = Vector2(65, 227.51)
 scale = Vector2(0.40625, 0.406123)
@@ -416,6 +436,7 @@ texture = ExtResource("10_a4m6f")
 flip_v = true
 
 [node name="Back5" type="Sprite2D" parent="GameManager/UI/Light"]
+modulate = Color(0.808998, 0.808998, 0.808998, 1)
 z_index = -10
 position = Vector2(130, 227.51)
 scale = Vector2(0.40625, 0.406123)
@@ -423,6 +444,7 @@ texture = ExtResource("10_a4m6f")
 flip_v = true
 
 [node name="BackToggle" type="Sprite2D" parent="GameManager/UI/Light"]
+modulate = Color(0.808998, 0.808998, 0.808998, 1)
 z_index = -10
 position = Vector2(-267.413, 55.8229)
 scale = Vector2(1.05, 1.01563)
@@ -430,6 +452,7 @@ texture = ExtResource("10_a4m6f")
 flip_v = true
 
 [node name="BackMode" type="Sprite2D" parent="GameManager/UI/Light"]
+modulate = Color(0.808998, 0.808998, 0.808998, 1)
 z_index = -10
 position = Vector2(-267.413, 230.259)
 scale = Vector2(1.05, 1.04442)
@@ -723,13 +746,42 @@ position = Vector2(-264.238, -274.388)
 scale = Vector2(0.599999, 0.5)
 texture = ExtResource("19_2ug6j")
 
-[node name="MusicLight" type="AudioStreamPlayer" parent="GameManager"]
+[node name="ToggleSound" parent="GameManager/UI/Icons" instance=ExtResource("21_2smhk")]
+position = Vector2(269.314, 293.411)
+
+[node name="Audio" type="Node" parent="GameManager"]
+
+[node name="MusicLight" type="AudioStreamPlayer" parent="GameManager/Audio"]
 stream = ExtResource("21_rl30s")
 bus = &"Music"
 
-[node name="MusicShadows" type="AudioStreamPlayer" parent="GameManager"]
+[node name="MusicShadows" type="AudioStreamPlayer" parent="GameManager/Audio"]
 stream = ExtResource("22_6by8q")
 bus = &"Music"
+
+[node name="PopSFX" type="AudioStreamPlayer" parent="GameManager/Audio"]
+stream = ExtResource("23_b4kby")
+bus = &"SFX"
+
+[node name="CannotLaunchSFX" type="AudioStreamPlayer" parent="GameManager/Audio"]
+stream = ExtResource("24_0ju1t")
+bus = &"SFX"
+
+[node name="QuitSFX" type="AudioStreamPlayer" parent="GameManager/Audio"]
+stream = ExtResource("24_kp2a2")
+bus = &"SFX"
+
+[node name="ToggleModeSFX" type="AudioStreamPlayer" parent="GameManager/Audio"]
+stream = ExtResource("25_s16m3")
+bus = &"SFX"
+
+[node name="TurnOffAutoLaunchSFX" type="AudioStreamPlayer" parent="GameManager/Audio"]
+stream = ExtResource("25_28k7g")
+bus = &"SFX"
+
+[node name="TurnOnAutoLaunchSFX2" type="AudioStreamPlayer" parent="GameManager/Audio"]
+stream = ExtResource("26_oer5p")
+bus = &"SFX"
 
 [connection signal="pressed" from="GameManager/UI/UIPosition/Add" to="GameManager" method="_on_add_falling_pressed"]
 [connection signal="pressed" from="GameManager/UI/UIPosition/Toggle" to="GameManager" method="_on_toggle_pressed"]

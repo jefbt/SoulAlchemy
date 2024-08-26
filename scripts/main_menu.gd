@@ -6,10 +6,13 @@ static var has_name_changed := false
 @onready var high_score_button = $HighScoreButton
 @onready var quit_button = $QuitButton
 @onready var audio_stream_player = $AudioStreamPlayer
+@onready var toggle_sound = $ToggleSound
 
+var toggle_sound_button : Button
 var current_focus = 0
 
 func _ready():
+	toggle_sound_button = toggle_sound.get_child(0) as Button
 	start_game_button.grab_focus()
 	if has_name_changed:
 		player_name.text = Save.player_name
@@ -35,7 +38,7 @@ func press_button():
 		_on_quit_button_pressed()
 	elif high_score_button.has_focus():
 		_on_high_score_button_pressed()
-	else:
+	elif start_game_button.has_focus():
 		_on_button_pressed()
 
 func focus_left():
@@ -43,12 +46,16 @@ func focus_left():
 		quit_button.grab_focus()
 	elif high_score_button.has_focus():
 		start_game_button.grab_focus()
+	elif quit_button.has_focus():
+		toggle_sound_button.grab_focus()
 
 func focus_right():
 	if start_game_button.has_focus():
 		high_score_button.grab_focus()
 	elif quit_button.has_focus():
 		start_game_button.grab_focus()
+	elif toggle_sound_button.has_focus():
+		quit_button.grab_focus()
 
 func focus_name():
 	player_name.grab_focus()

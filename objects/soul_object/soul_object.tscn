@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://bqgqi4wih1st0"]
+[gd_scene load_steps=22 format=3 uid="uid://bqgqi4wih1st0"]
 
 [ext_resource type="Script" path="res://objects/soul_object/soul_object.gd" id="1_5vjre"]
 [ext_resource type="Texture2D" uid="uid://dknc17anudb2r" path="res://assets/art/0-Water.png" id="2_32a71"]
@@ -9,6 +9,8 @@
 [ext_resource type="Texture2D" uid="uid://c7ivf8wxpxr4b" path="res://assets/art/yellow_body_squircle.png" id="7_kny4c"]
 [ext_resource type="Texture2D" uid="uid://dvli1ej3wu0yw" path="res://assets/art/purple_body_square.png" id="8_fqabn"]
 [ext_resource type="Texture2D" uid="uid://d3vqxt5do8kf1" path="res://assets/art/ship_D.png" id="9_yejph"]
+[ext_resource type="AudioStream" uid="uid://cwy8fgt7dx3p0" path="res://assets/audio/error_005.ogg" id="10_g0e4w"]
+[ext_resource type="AudioStream" uid="uid://c0dpjtlodv1qp" path="res://assets/audio/bong_001.ogg" id="12_ybop0"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_c7c12"]
 atlas = ExtResource("2_32a71")
@@ -219,5 +221,13 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 2
 text = "0"
 horizontal_alignment = 2
+
+[node name="WrongSFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("10_g0e4w")
+bus = &"SFX"
+
+[node name="LaunchSFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("12_ybop0")
+bus = &"SFX"
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
