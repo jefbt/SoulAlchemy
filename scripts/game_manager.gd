@@ -2,15 +2,9 @@ class_name GameManager
 extends Node
 
 # TODO find out about showing ads on android version (and maybe web version)
-# TODO quit game if cancel button pressed
-# TODO credits (add credits screen):
-	# light https://opengameart.org/content/awake-megawall-10
-	# shadows https://opengameart.org/content/crystal-cave-song18
-	# highscore https://opengameart.org/content/bouncy-hamster-dancing-menu-music
-	# menu 1 https://opengameart.org/content/doodle-menu-like-song
-	# menu 2 https://opengameart.org/content/pause-menu-music
 # TODO add a can't launch animation to the object
-# TODO add different sound effects for each element, like a swoosh for fire, ping for metal etc
+# TODO add different sound effects for each element, 
+	# like a swoosh for fire, ping for metal etc
 
 enum Mode { Light = 0, Shadows = 1 }
 enum MoveDirection { Left = -1, Right = 1 }

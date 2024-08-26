@@ -1,0 +1,85 @@
+[gd_scene load_steps=5 format=3 uid="uid://ddmb2qfqttge6"]
+
+[ext_resource type="Script" path="res://scripts/credits.gd" id="1_rpe1s"]
+[ext_resource type="Texture2D" uid="uid://danqjkncnylbd" path="res://assets/art/backgroundEmpty.png" id="2_taoh6"]
+[ext_resource type="AudioStream" uid="uid://dnjhqgn4v51bn" path="res://assets/audio/doodle.mp3" id="3_jln43"]
+[ext_resource type="Texture2D" uid="uid://bmeq7ox550f1q" path="res://assets/art/pink_body_rhombus.png" id="4_50kmc"]
+
+[node name="Credits" type="Node2D"]
+script = ExtResource("1_rpe1s")
+
+[node name="Background" type="Node2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="Background"]
+modulate = Color(0.28507, 0.288762, 0.363939, 1)
+z_index = -20
+position = Vector2(319, 325)
+scale = Vector2(0.640461, 0.640461)
+texture = ExtResource("2_taoh6")
+
+[node name="Sprite2D2" type="Sprite2D" parent="Background"]
+modulate = Color(0.28507, 0.288762, 0.363939, 1)
+z_index = -21
+position = Vector2(973, 325)
+scale = Vector2(0.640461, 0.640461)
+texture = ExtResource("2_taoh6")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_jln43")
+bus = &"Music"
+
+[node name="QuitButton" type="Button" parent="."]
+offset_left = 12.0
+offset_top = 11.204
+offset_right = 108.0
+offset_bottom = 80.205
+theme_override_colors/font_color = Color(0.259734, 0.0903729, 0.406075, 1)
+theme_override_colors/font_outline_color = Color(0.983791, 0.933012, 0.724922, 1)
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 24
+text = "Back"
+flat = true
+
+[node name="PinkBodyRhombus2" type="Sprite2D" parent="QuitButton"]
+z_index = -1
+position = Vector2(47.664, 34.5537)
+scale = Vector2(0.56, 0.379581)
+texture = ExtResource("4_50kmc")
+
+[node name="Label" type="Label" parent="."]
+offset_left = 104.0
+offset_top = 1.0
+offset_right = 1148.0
+offset_bottom = 98.0
+theme_override_colors/font_color = Color(0.985966, 0.765961, 0.343139, 1)
+theme_override_colors/font_outline_color = Color(0.256654, 0.214726, 0.454369, 1)
+theme_override_constants/outline_size = 35
+theme_override_font_sizes/font_size = 62
+text = "Soul Alchemy - Credits"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="."]
+offset_left = 58.0
+offset_top = 117.0
+offset_right = 1169.0
+offset_bottom = 610.0
+theme_override_font_sizes/font_size = 20
+text = "Game Design/Development: Jeferson Tomazella
+
+Art: Kenney: https://www.kenney.nl/assets
+
+Music:
+- Light Theme: cynicmusic - https://opengameart.org/content/awake-megawall-10
+- Shadows Theme: cynicmusic - https://opengameart.org/content/crystal-cave-song18
+- Main Menu: CleytonKauffman - https://opengameart.org/content/pause-menu-music
+- Highscore: cynicmusic - https://opengameart.org/content/bouncy-hamster-dancing-menu-music
+- Credits: StumpyStrust - https://opengameart.org/content/doodle-menu-like-song
+
+Game Jam: PirateSoftware - https://itch.io/jam/pirate15
+
+GDD: https://docs.google.com/document/d/1nnDAAh_wwekn0FRrWlAn2GxuB8MkLopvxoG_sZrOkTg
+
+Thank you for playing"
+
+[connection signal="pressed" from="QuitButton" to="." method="_on_quit_button_pressed"]
