@@ -10,6 +10,7 @@ extends Node2D
 @onready var high_shadows = $Labels/HighShadows
 @onready var high_balance = $Labels/HighBalance
 @onready var player_name_label = $Labels/PlayerNameLabel
+@onready var audio_stream_player = $AudioStreamPlayer
 
 func update_score(light_score: int, shadows_score: int, balance_score: int):
 	light_score_label.text = str(light_score)
@@ -33,11 +34,14 @@ func update_score(light_score: int, shadows_score: int, balance_score: int):
 func _ready():
 	play_again_button.grab_focus()
 	update_score(Globals.light_score, Globals.shadows_score, Globals.balance_score)
+	audio_stream_player.play(Globals.music_highscore)
 
 func _on_main_menu_button_pressed():
+	Globals.music_highscore = audio_stream_player.get_playback_position()
 	get_tree().change_scene_to_file("res://scenes/main_menu.tscn")
 
 func _on_play_again_button_pressed():
+	Globals.music_highscore = audio_stream_player.get_playback_position()
 	get_tree().change_scene_to_file("res://scenes/game.tscn")
 
 func press_button():

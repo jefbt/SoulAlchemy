@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://c2q35oixaw23s"]
+[gd_scene load_steps=12 format=3 uid="uid://c2q35oixaw23s"]
 
 [ext_resource type="Script" path="res://scripts/high_score.gd" id="1_2dhqc"]
 [ext_resource type="Texture2D" uid="uid://danqjkncnylbd" path="res://assets/art/backgroundEmpty.png" id="2_jys0q"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://6y7mu3vjeohj" path="res://assets/art/particleBlue_6.png" id="8_bfhtl"]
 [ext_resource type="Texture2D" uid="uid://hr5cx6qinrms" path="res://assets/art/particleYellow_3.png" id="9_svnjb"]
 [ext_resource type="Texture2D" uid="uid://enbuvaorlog7" path="res://assets/art/particleBlue_3.png" id="10_w4vtb"]
+[ext_resource type="AudioStream" uid="uid://c7xyek3teprus" path="res://assets/audio/AlexBouncyMaster.wav" id="11_vhvij"]
 
 [node name="HighScore" type="Node2D"]
 script = ExtResource("1_2dhqc")
@@ -313,6 +314,10 @@ position = Vector2(790.544, 30.0505)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("10_w4vtb")
 flip_v = true
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("11_vhvij")
+bus = &"Music"
 
 [connection signal="pressed" from="Buttons/MainMenuButton" to="." method="_on_main_menu_button_pressed"]
 [connection signal="pressed" from="Buttons/PlayAgainButton" to="." method="_on_play_again_button_pressed"]

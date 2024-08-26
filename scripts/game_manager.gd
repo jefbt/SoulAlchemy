@@ -2,6 +2,13 @@ class_name GameManager
 extends Node
 
 # TODO: find out about showing ads on android version (and maybe web version)
+# TODO credits (add credits screen):
+	# light https://opengameart.org/content/awake-megawall-10
+	# shadows https://opengameart.org/content/crystal-cave-song18
+	# highscore https://opengameart.org/content/bouncy-hamster-dancing-menu-music
+	# menu 1 https://opengameart.org/content/doodle-menu-like-song
+	# menu 2 https://opengameart.org/content/pause-menu-music
+# TODO sound and music toggle on/off
 
 enum Mode { Light = 0, Shadows = 1 }
 enum MoveDirection { Left = -1, Right = 1 }
@@ -19,6 +26,9 @@ const SOUL_OBJECT = preload("res://objects/soul_object/soul_object.tscn")
 @onready var score_shadows = $UI/Score/ScoreShadows
 @onready var multiplier = $UI/Score/Multiplier
 @onready var score_balance = $UI/Score/Balance/ScoreBalance
+
+@onready var music_light = $MusicLight
+@onready var music_shadows = $MusicShadows
 
 @onready var target_sprite_0 = $Target/TargetSprite0
 @onready var target_sprite_1 = $Target/TargetSprite1
@@ -123,11 +133,17 @@ func change_mode(new_mode: Mode):
 		mode_shadows.visible = false
 		shadows.visible = false
 		light.visible = true
+		Globals.music_shadows = music_shadows.get_playback_position()
+		music_shadows.stop()
+		music_light.play(Globals.music_light)
 	else:
 		mode_light.visible = false
 		mode_shadows.visible = true
 		shadows.visible = true
 		light.visible = false
+		Globals.music_light = music_light.get_playback_position()
+		music_light.stop()
+		music_shadows.play(Globals.music_shadows)
 	update_target_sprite()
 
 func toggle_mode():

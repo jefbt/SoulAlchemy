@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://jxmlqa5oskle"]
+[gd_scene load_steps=28 format=3 uid="uid://jxmlqa5oskle"]
 
 [ext_resource type="Script" path="res://scripts/game_manager.gd" id="1_faqmt"]
 [ext_resource type="Texture2D" uid="uid://danqjkncnylbd" path="res://assets/art/backgroundEmpty.png" id="1_ggoex"]
@@ -20,6 +20,8 @@
 [ext_resource type="Texture2D" uid="uid://bgws787suyx8s" path="res://assets/art/tileGrey_02.png" id="14_3k7yq"]
 [ext_resource type="Texture2D" uid="uid://6y7mu3vjeohj" path="res://assets/art/particleBlue_6.png" id="14_7l0o1"]
 [ext_resource type="Texture2D" uid="uid://ckhe6hytlq6x6" path="res://assets/art/icon_crossSmall.png" id="19_2ug6j"]
+[ext_resource type="AudioStream" uid="uid://bsx82d1owngdf" path="res://assets/audio/awake10_megaWall.mp3" id="21_rl30s"]
+[ext_resource type="AudioStream" uid="uid://fapfib45o6qt" path="res://assets/audio/song18.mp3" id="22_6by8q"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_hwoe0"]
 font_size = 44
@@ -720,6 +722,14 @@ z_index = -9
 position = Vector2(-264.238, -274.388)
 scale = Vector2(0.599999, 0.5)
 texture = ExtResource("19_2ug6j")
+
+[node name="MusicLight" type="AudioStreamPlayer" parent="GameManager"]
+stream = ExtResource("21_rl30s")
+bus = &"Music"
+
+[node name="MusicShadows" type="AudioStreamPlayer" parent="GameManager"]
+stream = ExtResource("22_6by8q")
+bus = &"Music"
 
 [connection signal="pressed" from="GameManager/UI/UIPosition/Add" to="GameManager" method="_on_add_falling_pressed"]
 [connection signal="pressed" from="GameManager/UI/UIPosition/Toggle" to="GameManager" method="_on_toggle_pressed"]
